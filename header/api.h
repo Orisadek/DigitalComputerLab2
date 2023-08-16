@@ -12,6 +12,7 @@ extern void moveToFreq();
 extern void  tone_gen();
 extern int deterNumSamples(int );
 extern void lcd_puts(const char * s);
+extern void print_names(char * , char * , char * , char* );
 #endif
 
 

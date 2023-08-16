@@ -54,7 +54,7 @@ void lcd_puts(const char * s){
          }
          if(!(last_freq >= sigFreq * 0.98 && last_freq <= sigFreq *1.02 )&&sigFreq!=-1){
              num_of_samples++;
-         if(num_of_samples>=1000){
+         if(num_of_samples>=50){
              last_freq = sigFreq;
              printFreq(sigFreq);
              num_of_samples = 0;
@@ -165,14 +165,14 @@ void tone_gen(){
     start_timer_st3();
     unsigned  int sample_vec;
     while(state == state3){
-       disable_interrupts();
         enable_ADC_Interupts();
         start_sampling() ;
         sleep_gie();
         disable_ADC_Interupts();
         sample_vec = return_res();
-        float  N_out = 0.366 *sample_vec + 1000;
-        T = subFreq / N_out;
+        float  N_out = -0.1536 *sample_vec + 1048;
+        //T = subFreq / N_out;
+        T = (int)N_out;
         set_pwm_t(T, (int)T/2);
        enable_interrupts();
     }
@@ -182,6 +182,48 @@ void tone_gen(){
 
 
 
+//******************************************************************
+// state 4
+//******************************************************************
+void print_names(char * f_name1, char * f_name2, char * l_name1, char*l_name2){
+    int fl = 1;
+    int index = 0;
+    char * tmp;
+    lcd_clear();
+    while(state == state4){
+        fl ^=1;
+        start_timer_state2();
+        sleep_gie();
+        if(fl==0)
+            continue;
+        switch(index){
+              case 0:
+                 tmp =f_name1;
+                 index++;
+                 break;
+              case 1:
+               tmp =f_name2;
+               index++;
+               break;
+              case 2:
+                tmp =l_name1;
+                index++;
+                break;
+              case 3:
+                tmp =l_name2;
+                index = 0;
+                break;
+        }
+        if(index%2)
+            lcd_home();
+
+        else
+            lcd_new_line;
+
+        lcd_puts(tmp);
+
+    }
+}
 
  
   

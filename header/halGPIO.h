@@ -38,6 +38,8 @@ extern void stop_timer_st3();
 extern int return_res();
 extern void set_pwm_t(int, int);
 extern void sleep_gie();
+extern void start_timer_state4(void);
+extern void stop_timer_st4(void);
 extern __interrupt void PBs_handler(void);
 extern __interrupt void Timer_handler(void);
 extern __interrupt void TIMER1_A1_ISR(void);

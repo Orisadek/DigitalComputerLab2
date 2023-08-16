@@ -1,7 +1,7 @@
 #include  "../header/api.h"    		// private library - API layer
 #include  "../header/app.h"    		// private library - APP layer
 #define ascii_offset 48
-#define id_size 9
+
 
 
 
@@ -9,8 +9,12 @@ enum FSMstate state;
 enum SYSmode lpm_mode;
 
 
-
 void main(void){
+    char* ori_f = "Ori      ";
+    char* nadav_f = "Nadav     ";
+    char* ori_l = "Sadek     ";
+    char* nadav_l = "Rozenfeld";
+
   state = state0;  // start in idle state on RESET
   lpm_mode = mode0;     // start in idle state on RESET
   sysConfig();
@@ -39,7 +43,7 @@ void main(void){
 	    break;
 
 	  case state4:
-	        state = state0;
+	      print_names(ori_f ,nadav_f ,ori_l , nadav_l);
 	    break;
 	}
   }

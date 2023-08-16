@@ -53,6 +53,14 @@ void stop_timer_st3(){
     TIMER_ST_3_CCTL1  = 0;
 }
 
+void stop_timer_st4(){
+    TIMER_ST2_CTL =  TIMER_ST2_RESET;
+}
+
+void start_timer_state4(void){
+    TIMER_ST2_CTL |=  MC_3;
+}
+
 
 //--------------------------------------------------------------------
 //             ADC functions
@@ -307,7 +315,7 @@ void lcd_strobe(){
 	  PBsArrIntPend &= ~PB2;
         }
     else if(PBsArrIntPend & PB3){
-    //  state = state4;
+    state = state4;
       PBsArrIntPend &= ~PB3;
         }
 
@@ -368,7 +376,7 @@ void __attribute__ ((interrupt(TIMER_ST1_VEC))) TIMER1_A1_ISR (void)
   switch(__even_in_range(VECTOR_TIMER_ST1, 0x0A))
   {
       case  VECTOR_TIMER_ST1_CCR1:                   // Vector  2:  TACCR1 CCIFG
-          TIMER_ST1_CTL &= ~(TIMER_ST1_IFG);
+
         break;
       case VECTOR_TIMER_ST1_CCR2:                    // Vector  4:  TACCR2 CCIFG
           if ( CCI)                 // Capture Input Pin Status
@@ -390,7 +398,7 @@ void __attribute__ ((interrupt(TIMER_ST1_VEC))) TIMER1_A1_ISR (void)
                   }
           break;
       case VECTOR_TIMER_ST1_IFG:
-          overflowes ++ ; break;              // Vector 10:  TAIFG
+          //overflowes ++ ; break;              // Vector 10:  TAIFG
       default:  break;
   }
 }

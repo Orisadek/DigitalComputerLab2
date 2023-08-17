@@ -20,7 +20,7 @@ With each button press, we enter a state:
   <img width="303" alt="image" src="https://github.com/Orisadek/DigitalComputerLab2/assets/43981934/929c6fa9-ef37-4256-a466-a7e35d9a6c3d">
 
 ## Sleep Mode (state0):
-state0 is in sleep mode (LPM0) and every state except the state3 returns to sleep after the state ends.
+state0 is in sleep mode (LPM0).
 
 ## Real-Time assignment: 
 add state4 as follows,
